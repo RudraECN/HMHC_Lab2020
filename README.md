@@ -1,4 +1,4 @@
-# Human Motion to Human Control Lab
+# From Human Motion to Humanoid Control Lab
 
 ## Report
 
