@@ -38,6 +38,8 @@ function []= main()
         %% Compute NE for each serial or tree structure -> get the forces on the ground
         [alfa,beta,COM,mass,ms,inertia]= NE_foward(pos,ori,time,Body);
         [grdf,grdm]= NE_backward(pos,ori,time,Body,alfa,beta,COM,mass,ms,inertia);
+        disp('Ground reactions computes (lie)');
+        pause();
         
         %% TODO
         %% Compare results

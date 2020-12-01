@@ -8,9 +8,11 @@ function [grdf,grdm]= NE_backward(pos,ori,time,Body,alfa,beta,COM,mass,ms,inerti
     
     g=[0,0,-9.81];
     
+    
     %%TODO
     % Check if the equations are right, the signs, the elements and the for
     % loops!
+    
     
     %% Solving for rigth arm serial
     fr=[0,0,0];
@@ -74,6 +76,11 @@ function [grdf,grdm]= NE_backward(pos,ori,time,Body,alfa,beta,COM,mass,ms,inerti
     
     % After completing the algorithm for the legs, we will get the ground
     % reaction :) 
+    
+    %%%%%%%%%%%%%%%%%%
+    grdf=0;
+    grdm=0;
+    %%%%%%%%%%%%%%%%%%
     
     %% TODO
     %% Solving for legs
