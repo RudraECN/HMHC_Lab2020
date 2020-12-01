@@ -70,21 +70,29 @@ function [grdf,grdm]= NE_backward(pos,ori,time,Body,alfa,beta,COM,mass,ms,inerti
         end
     end
     
-    % Up until here, we have the eeaction efforts of each body except for the legs
-    % HAVENT BEEN TESTED NOR VERIFIED SO NOT GUARANTEE THIS EFFORTS ARE
+    %% Solving for the legs
+    for i=13:20
+        for j=1:length(pos)-5
+            R= rotx(ori(i,1,j))*roty(ori(i,2,j))*rotz(ori(i,3,j));
+            %% NOT SURE ABOUT THIS
+            if (i==13 || i==14)
+                fr(i,:,j)=-fr(1,:,j)/2;
+                mr(i,:,j)=-mr(1,:,j)/2;
+            else
+                fr(i,:,j)=alfa(i,:,j)-mass(i)*g - fr(i-2,:,j);
+                mr(i,:,j)=beta(i,:,j)- cross(R*COM(i,:)',mass(i)*g)...
+                    - cross((pos(i-2,:,j)-pos(i,:,j)),fr(i-2,:,j)) -mr(i-2,:,j);
+            end
+        end
+    end
+    
+    grdf=-fr(20,:,:);
+    grdf=reshape(grdf,[3,length(pos)-5]);
+    grdm=-mr(20,:,:);
+    grdm=reshape(grdm,[3,length(pos)-5]);
+    
+    % HAVENT BEEN TESTED NOR VERIFIED SO NOT GUARANTEE THESE EFFORTS ARE
     % RIGHT
-    
-    % After completing the algorithm for the legs, we will get the ground
-    % reaction :) 
-    
-    %%%%%%%%%%%%%%%%%%
-    grdf=0;
-    grdm=0;
-    %%%%%%%%%%%%%%%%%%
-    
-    %% TODO
-    %% Solving for legs
-    
-    % [grdf,grdm]= barbie doll;
+
 
 end

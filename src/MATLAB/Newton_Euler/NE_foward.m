@@ -1,5 +1,5 @@
 %% Computes alfa and beta for all the bodies
-%% WORKS BUT IT NEEDS TESTING
+%% KINDA WORKS BUT IT NEEDS TESTING
 
 function [alfa,beta,COM,mass,ms,inertia]= NE_foward(pos,ori,time,body)
 
@@ -9,11 +9,11 @@ function [alfa,beta,COM,mass,ms,inertia]= NE_foward(pos,ori,time,body)
         "forearmR","handL","handR","","","thighL","thighR","shankL","shankR","footL","footR"];
     
     % Ignoring frame 5 6 13 and 14 since their velocities don't correspond
-    % to an specific body
+    % to a specific body
     for i=1:length(bodyparts)
         if (i ~= [5,6,13,14])
             COM(i,:)=body.(bodyparts(i)).COMpos;
-            mass(i)=body.(bodyparts(i)).Mass/1000;
+            mass(i)=body.(bodyparts(i)).Mass;
             ms(i,:)= mass(i) * COM(i,:);
             inertia(:,:,i)=body.(bodyparts(i)).Inertia;
         end

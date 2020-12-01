@@ -6,7 +6,7 @@
 function [Body]= BSPparameters(P)
 
   %% Assuming constant density along the whole body
-  p= 1.0; % g/cm3 (from google)
+  p= 1000.0; % kg/m3 (from google)
 
   %% Hand segment (SE)
   Hand.a=P(14)/(2*pi);
@@ -108,7 +108,7 @@ function [Body]= BSPparameters(P)
   Wholetrunk.Mass=Lowertrunk.Mass+Middletrunk.Mass+Uppertrunk.Mass;
   
   %% Total mass
-  Totalmass=(2*Hand.Mass+2*Forearm.Mass+2*Upperarm.Mass+2*Foot.Mass+2*Shank.Mass+2*Thigh.Mass+Head.Mass+Uppertrunk.Mass+Middletrunk.Mass+Lowertrunk.Mass)/1000;
+  Totalmass=(2*Hand.Mass+2*Forearm.Mass+2*Upperarm.Mass+2*Foot.Mass+2*Shank.Mass+2*Thigh.Mass+Head.Mass+Uppertrunk.Mass+Middletrunk.Mass+Lowertrunk.Mass);
   
   %% Assembly body structure
   Body.handL=Hand;
