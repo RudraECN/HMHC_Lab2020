@@ -1,5 +1,5 @@
 %% Reads the content of the DRF files and returns the position and orientation of the joints frames
-function [pos,ori] = readDRF(filename)
+function [pos,ori,time] = readDRF(filename)
 
     fd=fopen(filename);
     line=fgetl(fd);
@@ -11,8 +11,12 @@ function [pos,ori] = readDRF(filename)
             continue;
         elseif (line(1:3)=='6dj')
            Aux(i,:)=convertCharsToStrings(line);
-           i=i+1;
            line=fgetl(fd);
+           i=i+1;
+        elseif (line(1:2)=='ts')
+            Aux3(i,:)=convertCharsToStrings(line);
+            line=fgetl(fd);
+            
         else
             line=fgetl(fd);
         end
@@ -33,7 +37,12 @@ function [pos,ori] = readDRF(filename)
        end
     end
     
-    pos = drfdata(:,1:3,:);
-    ori = drfdata(:,4:6,:);
-
+    pos = drfdata(:,1:3,:)/1000;
+    ori = deg2rad(drfdata(:,4:6,:));
+    
+    %% Split the ts lines in each ' ' and convert to a number
+    for i=1:length(Aux3)
+       temp=strsplit(Aux3(i),' ');
+       time(i)=str2num(temp(2));
+    end
 end

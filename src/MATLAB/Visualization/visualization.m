@@ -6,7 +6,7 @@ function [] = visualization(pos)
         
         v = get3dline(2,1,pos,i);
         plot3(v(:,1),v(:,2),v(:,3));
-        axis([-1000 1000 -1000 1000 0 2000]);
+        axis([-1 1 -1 1 0 2]);
         hold on;
         v = get3dline(3,2,pos,i);
         plot3(v(:,1),v(:,2),v(:,3));

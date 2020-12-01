@@ -27,17 +27,27 @@ function []= main()
         
         disp('Reading file');
         F= readForce(forcefiles(i));
-        [pos,ori]= readDRF(MCfiles(i));
+        [pos,ori,time]= readDRF(MCfiles(i));
         disp('Visualizating file:');
         disp(MCfiles(i));
-        visualization(pos);
+        %visualization(pos); % comment this line if you get bored of my poor animation
         disp('Type a key to continue');
         pause();
+        
+        %% TODO
+        %% Compute NE for each serial or tree structure -> get the forces on the ground
+        [alfa,beta,COM,mass,ms,inertia]= NE_foward(pos,ori,time,Body);
+        [grdf,grdm]= NE_backward(pos,ori,time,Body,alfa,beta,COM,mass,ms,inertia);
+        
+        %% TODO
+        %% Compare results
+        % functions to visualize the obtained reactions vs the measurements
+        % in vector F
+        
+        
     end
     
-    %% TODO
-    %% Compute NE for each serial or tree structure -> get the forces exerted on the ground
-    %% Compare results
+
     
 
 end
