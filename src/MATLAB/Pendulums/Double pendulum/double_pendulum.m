@@ -1,0 +1,128 @@
+clear all
+close all
+clc
+
+% 1-second motion
+n = 100;
+dt = 1/n;
+
+% Number of bodies
+b = 2;
+
+% Lengths
+l = [2,1];
+
+% masses of the bodies
+masses = [3,2];
+
+% Gravity along -y axis (global frame)
+gravity = [0;-9.8;0];
+
+% COM and ms expressed in i-th frame of the two bodies
+COM(:,1) = [1;0;0];
+COM(:,2) = [0.5;0;0];
+ms = [masses(1)*COM(:,1), masses(2)*COM(:,2)];
+inertia_mom = masses .* (l.^2);
+
+% Define q1 and q2
+q1 = linspace(0,pi,n);
+q2 = linspace(-pi/2,pi/2,n);
+
+% Positions and orientations in the global frame
+pos(1,:,1) = zeros(1,n);
+pos(2,:,1) = zeros(1,n);
+pos(3,:,1) = zeros(1,n);
+ori(1,:,1) = zeros(1,n);
+ori(2,:,1) = zeros(1,n);
+ori(3,:,1) = q1;
+
+pos(1,:,2) = l(1)*cos(q1);
+pos(2,:,2) = l(1)*sin(q1);
+pos(3,:,2) = zeros(1,n);
+ori(1,:,2) = zeros(1,n);
+ori(2,:,2) = zeros(1,n);
+ori(3,:,1) = q1+q2;
+
+% Obtain velocity and orientation
+v = diff(pos,1,2) / dt;
+w = diff(ori,1,2) / dt;
+vd = diff(v,1,2) / dt;
+wd = diff(w,1,2) / dt;
+
+% Conform all the dimensions
+n = size(vd,2);
+pos = pos(:,1:n,:);
+ori = ori(:,1:n,:);
+v = v(:,1:n,:);
+w = w(:,1:n,:);
+
+
+% Inertia matrix (in i-th frame)
+inertia_mat(:,:,1) = eye(3);
+inertia_mat(3,3,1) = inertia_mom(1);
+inertia_mat(:,:,2) = eye(3);
+inertia_mat(3,3,2) = inertia_mom(2);
+alpha = zeros(3,n,b);
+beta = zeros(3,n,b);
+
+% Compute LHS of the NE equations
+for bi = 1:b
+    for i = 1:n
+        [alpha(:,i,bi),beta(:,i,bi)] = solveNE_LHS(vd(:,i,bi),...
+            wd(:,i,bi),w(:,i,bi),ori(:,i,bi),ms(:,bi),inertia_mat(:,:,bi),masses(:,bi));
+    end
+end
+
+% Compute RHS of the NE equations
+f_i = zeros(3,n,bi);
+m_i = zeros(3,n,bi);
+
+% Terminal body
+F = [0;0;0];
+M = [0;0;0];
+for i = 1:n
+    dist = pos(:,i,1) - pos(:,i,1);
+    [f_i(:,i,1),m_i(:,i,1)] = solveNE_balance(alpha(:,i,1),beta(:,i,1),...
+        ori(:,i,1),COM(:,1),masses(:,1),F(:,1),M(:,1),dist);
+end
+
+% Loop through the other bodies
+for bi=b-1:-1:1
+    for i=1:n
+        f_nextbody = -f_i(:,i,bi+1);
+        m_nextbody = -m_i(:,i,bi+1);
+        dist = pos(:,i,bi) - pos(:,i,bi);
+        [f_i(:,i,bi),m_i(:,i,bi)] = solveNE_balance(alpha(:,i,bi),...
+            beta(:,i,bi),ori(:,i,bi),COM(:,bi),masses(:,bi),F(:,bi),...
+            M(:,bi),dist);
+    end
+end
+
+% Obtain ground reaction forces and moments
+GRF(1,:) = -f_i(1,:,1);
+GRF(2,:) = -f_i(2,:,1);
+GRF(3,:) = -f_i(3,:,1);
+GRM(1,:) = -m_i(1,:,1);
+GRM(2,:) = -m_i(2,:,1);
+GRM(3,:) = -m_i(3,:,1);
+
+% Plot ground reaction forces and moments
+figure;
+subplot(2,3,1)
+plot(GRF(1,:))
+title('GRF - X axis')
+subplot(2,3,2)
+plot(GRF(2,:))
+title('GRF - Y axis')
+subplot(2,3,3)
+plot(GRF(3,:))
+title('GRF - Z axis')
+subplot(2,3,4)
+plot(GRM(1,:))
+title('GRM - X axis')
+subplot(2,3,5)
+plot(GRM(2,:))
+title('GRM - Y axis')
+subplot(2,3,6)
+plot(GRM(3,:))
+title('GRM - Z axis')
