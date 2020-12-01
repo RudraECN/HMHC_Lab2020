@@ -3,10 +3,10 @@
 % Returns them in the objects
 
 % P should be in same units as the density!
-function [Hand, Forearm, Upperarm, Foot, Shank, Thigh, Head, Uppertrunk, Middletrunk, Lowertrunk,  Wholetrunk, Totalmass]= BSPparameters(P)
+function [Body]= BSPparameters(P)
 
   %% Assuming constant density along the whole body
-  p= 1.1; % g/cm3 (from google)
+  p= 1.0; % g/cm3 (from google)
 
   %% Hand segment (SE)
   Hand.a=P(14)/(2*pi);
@@ -98,7 +98,20 @@ function [Hand, Forearm, Upperarm, Foot, Shank, Thigh, Head, Uppertrunk, Middlet
   Wholetrunk.Mass=Lowertrunk.Mass+Middletrunk.Mass+Uppertrunk.Mass;
   
   %% Total mass
-  Totalmass=(2*Hand.Mass+2*Forearm.Mass+2*Upperarm.Mass+2*Foot.Mass+Shank.Mass+Thigh.Mass+Head.Mass+Uppertrunk.Mass+Middletrunk.Mass+Lowertrunk.Mass)/1000;
+  Totalmass=(2*Hand.Mass+2*Forearm.Mass+2*Upperarm.Mass+2*Foot.Mass+2*Shank.Mass+2*Thigh.Mass+Head.Mass+Uppertrunk.Mass+Middletrunk.Mass+Lowertrunk.Mass)/1000;
   
+  %% Assembly body structure
+  Body.hand=Hand;
+  Body.forearm=Forearm;
+  Body.upperam=Upperarm;
+  Body.foot=Foot;
+  Body.shank=Shank;
+  Body.thigh=Thigh;
+  Body.head=Head;
+  Body.uppertrunk=Uppertrunk;
+  Body.middletrunk=Middletrunk;
+  Body.lowertrunk=Lowertrunk;
+  Body.wholetrunk=Wholetrunk;
+  Body.totalmass=Totalmass;
   
-endfunction
+end

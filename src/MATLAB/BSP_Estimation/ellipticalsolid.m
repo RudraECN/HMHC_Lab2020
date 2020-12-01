@@ -2,7 +2,7 @@
 % The call should be:
 % ellipticalsolid(p,L,a0,b0,b0,b0,a1,b1,b1,b1)
 
-function [Mass, COMpos, Inertia] = ellipticalsolid(p,L,a0,b0,c0,d0,a1,b1,c1,d1);
+function [Mass, COMpos, Inertia] = ellipticalsolid(p,L,a0,b0,c0,d0,a1,b1,c1,d1)
   
   [B1ab, B2ab, B3ab]=B123(a0,b0,c0,d0,a1,b1,c1,d1);
   [A1ab, A2ab, A3ab]=A123(B1ab,B2ab,B3ab);
@@ -23,7 +23,7 @@ function [Mass, COMpos, Inertia] = ellipticalsolid(p,L,a0,b0,c0,d0,a1,b1,c1,d1);
   
   Inertia= diag([Ixx,Iyy,Izz]);
   
-endfunction
+end
 
 
 function [A1ab, A2ab, A3ab] = A123(B1ab,B2ab,B3ab)
@@ -32,13 +32,13 @@ function [A1ab, A2ab, A3ab] = A123(B1ab,B2ab,B3ab)
   A2ab= B1ab/4 + B2ab/3 + B3ab/2;
   A3ab= B1ab/5  + B2ab/4 + B3ab/3;
   
-endfunction
+end
 
 function [A4abcd]= A4(B4abcd,B5abcd,B6abcd,B7abcd,B8abcd)
   
   A4abcd= B4abcd/5 + B5abcd/4 + B6abcd/3 + B7abcd/2 + B8abcd;
   
-endfunction
+end
 
 function [B1ab, B2ab, B3ab] = B123(a0,b0,c0,d0,a1,b1,c1,d1)
   
@@ -46,7 +46,7 @@ function [B1ab, B2ab, B3ab] = B123(a0,b0,c0,d0,a1,b1,c1,d1)
   B2ab= a0*(b1-b0)+b0*(a1-a0);
   B3ab= a0*b0;
   
-endfunction
+end
 
 function [B4abcd, B5abcd, B6abcd, B7abcd, B8abcd]= B45678(a0,b0,c0,d0,a1,b1,c1,d1)
   B4abcd= (a1-a0)*(b1-b0)*(c1-c0)*(d1-d0); 
@@ -66,4 +66,4 @@ function [B4abcd, B5abcd, B6abcd, B7abcd, B8abcd]= B45678(a0,b0,c0,d0,a1,b1,c1,d
           a0*b0*c0*(d1-d0);
   B8abcd= a0*b0*c0*d0;
   
-endfunction
+end

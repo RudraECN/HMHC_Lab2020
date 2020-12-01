@@ -1,5 +1,5 @@
 %% Semi-Ellipsoid equations
-function [Mass, COMpos, Inertia] = semiellipsoid(p,a,b,c);
+function [Mass, COMpos, Inertia] = semiellipsoid(p,a,b,c)
   
   Mass= 2*pi*p*a*b*c/3;
   COMpos= 3*c/8;
@@ -9,4 +9,4 @@ function [Mass, COMpos, Inertia] = semiellipsoid(p,a,b,c);
   
   Inertia=diag([Ixx,Iyy,Izz]);
   
-endfunction
+end
