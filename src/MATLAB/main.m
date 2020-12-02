@@ -44,8 +44,9 @@ function []= main()
         
         %% TODO
         %% Compare results
-        % functions to visualize the obtained reactions vs the measurements
-        % in vector F
+        
+        %OK there's something good to be adapted from
+        %Force_Data_Error_Visualization here, TO BE DONE
         
         %% Easy comparation of the results
         % Only comparing fx

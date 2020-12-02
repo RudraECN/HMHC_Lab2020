@@ -86,7 +86,7 @@ for i = 1:n
         ori(:,i,1),COM(:,1),masses(:,1),F(:,1),M(:,1),dist);
 end
 
-% Loop through the other bodies
+% Loop through the other body
 for bi=b-1:-1:1
     for i=1:n
         f_nextbody = -f_i(:,i,bi+1);
@@ -110,19 +110,31 @@ GRM(3,:) = -m_i(3,:,1);
 figure;
 subplot(2,3,1)
 plot(GRF(1,:))
-title('GRF - X axis')
+title('GRF - X axis', 'FontSize',12,'FontWeight','bold','Color','#f9a800')
+xlabel('time')
+ylabel('N')
 subplot(2,3,2)
 plot(GRF(2,:))
-title('GRF - Y axis')
+title('GRF - Y axis', 'FontSize',12,'FontWeight','bold','Color','#f9a800')
+xlabel('time')
+ylabel('N')
 subplot(2,3,3)
 plot(GRF(3,:))
-title('GRF - Z axis')
+title('GRF - Z axis', 'FontSize',12,'FontWeight','bold','Color','#f9a800')
+xlabel('time')
+ylabel('N')
 subplot(2,3,4)
 plot(GRM(1,:))
-title('GRM - X axis')
+title('GRM - X axis', 'FontSize',12,'FontWeight','bold','Color','#f9a800')
+xlabel('time')
+ylabel('Nm')
 subplot(2,3,5)
 plot(GRM(2,:))
-title('GRM - Y axis')
+title('GRM - Y axis', 'FontSize',12,'FontWeight','bold','Color','#f9a800')
+xlabel('time')
+ylabel('Nm')
 subplot(2,3,6)
 plot(GRM(3,:))
-title('GRM - Z axis')
+title('GRM - Z axis', 'FontSize',12,'FontWeight','bold','Color','#f9a800')
+xlabel('time')
+ylabel('Nm')

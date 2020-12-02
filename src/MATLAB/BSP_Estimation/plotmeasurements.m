@@ -90,6 +90,12 @@ std=[
     ];
 
 %% Plots the values
-errorbar(P,std,'x')
+figure;
+e = errorbar(P,std,'o');
+title('Hanavan Parameters Mean and Standard Deviation', 'FontSize',12,'FontWeight','bold','Color','#f9a800');
+xlabel('Parameter Number');
+ylabel('cm');
 
+e.Color = 'black';
+e.CapSize = 10;
 end
