@@ -65,7 +65,7 @@ inertia_mat(3,3,2) = inertia_mom(2);
 alpha = zeros(3,n,b);
 beta = zeros(3,n,b);
 
-% Compute LHS of the NE equations
+% Compute LeftHandSide of the NE equations
 for bi = 1:b
     for i = 1:n
         [alpha(:,i,bi),beta(:,i,bi)] = solveNE_LHS(vd(:,i,bi),...
@@ -73,7 +73,7 @@ for bi = 1:b
     end
 end
 
-% Compute RHS of the NE equations
+% Compute RightHandSide of the NE equations
 f_i = zeros(3,n,bi);
 m_i = zeros(3,n,bi);
 

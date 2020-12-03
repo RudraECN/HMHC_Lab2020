@@ -31,7 +31,7 @@ function []= main()
         [pos,ori,time]= readDRF(MCfiles(i));
         disp('Visualizating file:');
         disp(MCfiles(i));
-        %visualization(pos); % comment this line if you get bored of my poor animation
+        visualization(pos); % comment this line if you get bored of my poor animation
         disp('Type a key to continue');
         pause();
         
