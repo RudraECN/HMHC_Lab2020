@@ -32,8 +32,8 @@ function []= main()
         disp('Visualizating file:');
         disp(MCfiles(i));
         L = length(time);
-        visualization(pos,MCfiles(i)); % comment this line if you get bored of my poor animation
-        %visualization_adapted(Body, L, pos, ori ); %% check it, to improve
+        %visualization(pos,MCfiles(i)); % comment this line if you get bored of my poor animation
+        visualization_adapted(Body, L, pos, ori ); 
         disp('Type a key to continue');
         pause();
         

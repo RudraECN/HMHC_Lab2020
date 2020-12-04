@@ -1,12 +1,12 @@
 %% Avery simple way of visualizating the movement
 % Could be improved
-function [] = visualization(pos)
+function [] = visualization(pos, MCfile)
 
     for i=1:length(pos)
         
         v = get3dline(2,1,pos,i);
         plot3(v(:,1),v(:,2),v(:,3));
-        title('Motion', 'FontSize',12,'FontWeight','bold','Color','#f9a800')
+        title(MCfile, 'FontSize',12,'FontWeight','bold','Color','#f9a800')
         axis([-1 1 -1 1 0 2]);
         hold on;
         v = get3dline(3,2,pos,i);
