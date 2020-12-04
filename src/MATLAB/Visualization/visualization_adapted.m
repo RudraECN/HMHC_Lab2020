@@ -21,7 +21,7 @@ function [] = visualization_adapted(Body, L, pos, ori)
 
 
 
-for k=1:L
+for k=1:1:L
     hold off
    %head
    v4=[pos(4,:,k), ori(4,:,k)];
@@ -135,6 +135,6 @@ for k=1:L
    [X,Y,Z]=trans_rot(X,Y,Z,v19);
    mesh(X,Y,Z);
    
-   axis("equal")
+   %axis("equal")
   
 end

@@ -24,7 +24,7 @@ function []= main()
         "mediumKickArm.csv", "medJump.csv", "quickJump.csv", "slowArm.csv", "slowKick.csv", "slowKickArm.csv"];
     
     % Testing only the slowArm for now, i=16
-    for i=8:length(MCfiles)
+    for i=6:length(MCfiles)
         
         disp('Reading file');
         F= readForce(forcefiles(i));
@@ -32,29 +32,29 @@ function []= main()
         disp('Visualizating file:');
         disp(MCfiles(i));
         L = length(time);
-        visualization(pos,MCfiles(i)); % comment this line if you get bored of my poor animation
+        %visualization(pos,MCfiles(i)); % comment this line if you get bored of my poor animation
         %visualization_adapted(Body, L, pos, ori ); %% check it, to improve
         disp('Type a key to continue');
         pause();
+ 
         
         %% TODO
         %% Compute NE for each serial or tree structure -> get the forces on the ground
         [alfa,beta,COM,mass,ms,inertia]= NE_forward(pos,ori,time,Body);
         [grdf,grdm]= NE_backward(pos,ori,time,Body,alfa,beta,COM,mass,ms,inertia);
         disp('Ground reactions computes (lie)');
+        disp('Type a key to continue');
+        steps = length(grdf);
         pause();
         
         %% TODO
         %% Compare results
-        
-        %OK there's something good to be adapted from
-        %Force_Data_Error_Visualization here, TO BE DONE
-        
-        %% Easy comparation of the results
-        % Only comparing fx
-        plot(F(1,:));
-        hold on;
-        plot(grdf(1,:));
+        %comparing the error
+        ForMom_Error(MCfiles(i),steps,F, grdf, grdm);
+        %comparing them side by side
+        Force_Data_Plot(MCfiles(i), F, grdf, grdm)
+
+
         % Not very similar, possible error sources:
         % 1. Apparently when they did the experiment, they started recording
         % the measurments from the ground plate before the measurements

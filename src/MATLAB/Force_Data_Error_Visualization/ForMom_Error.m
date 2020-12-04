@@ -1,4 +1,4 @@
-function [Fx, Fy, Fz, Mx, My, Mz] = ForMom_Error(name_file,Forx, Fory, Forz, Momx, Momy, Momz)
+function [] = ForMom_Error(filename,steps,F, grdf, grdm)
 %TO call this function, you have to pass it:
 %         'name_of_my_file.csv'
 %while you are in the same folder of the data
@@ -6,53 +6,58 @@ function [Fx, Fy, Fz, Mx, My, Mz] = ForMom_Error(name_file,Forx, Fory, Forz, Mom
 
 %The return arguments can be removed and it can only be used to plot stuff
 %% Open and import data
-filename = name_file;
-data_import = readmatrix(filename);
-%time
-t = data_import(:, 2);
-%size
-n = size(t);
+%create a vector of time steps
+n = linspace(0,steps,steps);
 %forces
-dataFx = data_import(:, 3);
-dataFy = data_import(:, 4);
-dataFz = data_import(:, 5);
-
+dataFx = F(1,:);
+dataFy = F(2,:);
+dataFz = F(3,:);
 %moments
-dataMx = data_import(:, 6);
-dataMy = data_import(:, 7);
-dataMz = data_import(:, 8);
+dataMx = F(4,:);
+dataMy = F(5,:);
+dataMz = F(6,:);
 %% Find the errors
-Fx = Forx - dataFx;
-Fy = Fory - dataFy;
-Fz = Forz - dataFz;
-Mx = Momx - dataMx;
-My = Momy - dataMy;
-Mz = Momz - dataMz;
+for i=1:steps
+Fx(i) = grdf(1,i) - dataFx(i);
+Fy(i) = grdf(2,i) - dataFy(i);
+Fz(i) = grdf(3,i) - dataFz(i);
+Mx(i) = grdm(1,i) - dataMx(i);
+My(i) = grdm(2,i) - dataMy(i);
+Mz(i) = grdf(3,i) - dataMz(i);
+end
+
 %% Plot Data
+
 % Create plots, forces and moments together
 figure(1)
 forces_moments_plot = tiledlayout(2,3); % Requires R2019b or later
 my_title1 = strcat('Forces and Moments Error of ', ':', filename);
-title(forces_moments_plot, my_title1 )
 nexttile
-plot(t,Fx)
-title('Fx Error')
-nexttile
-plot(t,Fy)
-title('Fy Error')
-nexttile
-plot(t,Fz)
-title('Fz Error')
-nexttile
-plot(t,Mx)
-title('Mx Error')
-nexttile
-plot(t,My)
-title('My Error')
-nexttile
-plot(t,Mz)
-title('Mz Error')
+plot(n,Fx)
+title('Fx Error', 'FontSize',12,'FontWeight','bold','Color','#f9a800')
 
+nexttile
+plot(n,Fy)
+title('Fy Error', 'FontSize',12,'FontWeight','bold','Color','#f9a800')
+
+nexttile
+plot(n,Fz)
+title('Fz Error', 'FontSize',12,'FontWeight','bold','Color','#f9a800')
+
+nexttile
+plot(n,Mx)
+title('Mx Error', 'FontSize',12,'FontWeight','bold','Color','#f9a800')
+
+nexttile
+plot(n,My)
+title('My Error', 'FontSize',12,'FontWeight','bold','Color','#f9a800')
+
+
+nexttile
+plot(n,Mz)
+title('Mz Error', 'FontSize',12,'FontWeight','bold','Color','#f9a800')
+
+title(forces_moments_plot, my_title1)
 
 
 end
