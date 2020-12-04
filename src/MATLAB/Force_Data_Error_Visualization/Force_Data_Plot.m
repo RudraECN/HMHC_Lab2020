@@ -12,37 +12,48 @@ nexttile
         hold on;
         plot(grdf(1,:));
 title('Fx', 'FontSize',12,'FontWeight','bold','Color','#f9a800')
+xlabel('steps')
+ylabel('N')
 
 nexttile
         plot(F(2,:));
         hold on;
         plot(grdf(2,:));
 title('Fy', 'FontSize',12,'FontWeight','bold','Color','#f9a800')
+xlabel('steps')
+ylabel('N')
 
 nexttile
         plot(F(3,:));
         hold on;
         plot(grdf(3,:));
 title('Fz', 'FontSize',12,'FontWeight','bold','Color','#f9a800')
-      
+xlabel('steps')
+ylabel('N')
+
 nexttile
         plot(F(4,:));
         hold on;
         plot(grdm(1,:));
 title('Mx', 'FontSize',12,'FontWeight','bold','Color','#f9a800')
-       
+xlabel('steps')
+ylabel('Nm')
+
 nexttile
         plot(F(5,:));
         hold on;
         plot(grdm(2,:));
 title('My', 'FontSize',12,'FontWeight','bold','Color','#f9a800')
+xlabel('steps')
+ylabel('Nm')
 
 nexttile
         plot(F(6,:));
         hold on;
         plot(grdf(3,:));
 title('Mz', 'FontSize',12,'FontWeight','bold','Color','#f9a800')
-
+xlabel('steps')
+ylabel('Nm')
 title(forces_moments_plot, my_title1 );
 
 end

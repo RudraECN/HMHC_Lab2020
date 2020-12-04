@@ -35,27 +35,38 @@ my_title1 = strcat('Forces and Moments Error of ', ':', filename);
 nexttile
 plot(n,Fx)
 title('Fx Error', 'FontSize',12,'FontWeight','bold','Color','#f9a800')
+xlabel('steps')
+ylabel('N')
 
 nexttile
 plot(n,Fy)
 title('Fy Error', 'FontSize',12,'FontWeight','bold','Color','#f9a800')
+xlabel('steps')
+ylabel('N')
 
 nexttile
 plot(n,Fz)
 title('Fz Error', 'FontSize',12,'FontWeight','bold','Color','#f9a800')
+xlabel('steps')
+ylabel('N')
 
 nexttile
 plot(n,Mx)
 title('Mx Error', 'FontSize',12,'FontWeight','bold','Color','#f9a800')
+xlabel('steps')
+ylabel('Nm')
 
 nexttile
 plot(n,My)
 title('My Error', 'FontSize',12,'FontWeight','bold','Color','#f9a800')
-
+xlabel('steps')
+ylabel('Nm')
 
 nexttile
 plot(n,Mz)
 title('Mz Error', 'FontSize',12,'FontWeight','bold','Color','#f9a800')
+xlabel('steps')
+ylabel('Nm')
 
 title(forces_moments_plot, my_title1)
 
