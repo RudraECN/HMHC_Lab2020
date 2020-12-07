@@ -6,7 +6,7 @@ figure(2)
 
 filename = erase(filename,'.drf');
 forces_moments_plot = tiledlayout(2,3); % Requires R2019b or later
-my_title1 = strcat('Forces and Moments side by side ', ':', filename);
+my_title1 = strcat('Forces and Moments side by side of', ': ', filename);
 
 nexttile
         % Only comparing fx

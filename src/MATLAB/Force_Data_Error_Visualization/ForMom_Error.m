@@ -28,7 +28,7 @@ end
 % Create plots, forces and moments together
 figure(1)
 forces_moments_plot = tiledlayout(2,3); % Requires R2019b or later
-my_title1 = strcat('Forces and Moments Error of ', ':', filename);
+my_title1 = strcat('Forces and Moments Error of ', ': ', filename);
 nexttile
 plot(n,Fx)
 title('Fx Error', 'FontSize',12,'FontWeight','bold','Color','#f9a800')
