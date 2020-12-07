@@ -1,4 +1,4 @@
-function [] = visualization_adapted(Body, L, pos, ori)
+function [] = visualization_adapted(Body, time, pos, ori)
  % addpath(genpath('../Functions'));
 
   %% Assembly body structure
@@ -18,10 +18,12 @@ function [] = visualization_adapted(Body, L, pos, ori)
   U_Trunk=Body.uppertrunk;
   M_Trunk=Body.middletrunk;
   L_Trunk=Body.lowertrunk;
+  
+  L=length(time);
+  dt=time(2)-time(1);
 
-
-figure
-for k=1:1:L
+for k=1:L
+    hold off;
    %head
    v4=[pos(4,:,k), ori(4,:,k)];
    [X,Y,Z] = ellipsoid(0,0,0,Head.a,Head.b,Head.c); %Z=Z-Head.c;
@@ -134,8 +136,8 @@ for k=1:1:L
    [X,Y,Z]=trans_rot(X,Y,Z,v19);
    mesh(X,Y,Z);
    
-   pause(0.00001);
-   hold off;
+   axis("equal");
+   pause(dt);
 
   
 end
