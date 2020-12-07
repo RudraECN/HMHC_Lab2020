@@ -21,8 +21,8 @@ function [] = visualization_adapted(Body, L, pos, ori)
 
 
 
+figure
 for k=1:1:L
-    hold off
    %head
    v4=[pos(4,:,k), ori(4,:,k)];
    [X,Y,Z] = ellipsoid(0,0,0,Head.a,Head.b,Head.c); %Z=Z-Head.c;
@@ -38,6 +38,7 @@ for k=1:1:L
    mesh(X,Y,Z);
 
    
+
    %M_Trunk
    v2=[pos(2,:,k), ori(2,:,k)];
    [X,Y,Z]=elliptical(M_Trunk.a0,M_Trunk.b0,M_Trunk.a1,M_Trunk.b1,M_Trunk.L); Z=Z-M_Trunk.L/2;
@@ -55,6 +56,7 @@ for k=1:1:L
    [X,Y,Z]=elliptical(R_Upperarm.a0,R_Upperarm.b0,R_Upperarm.a1,R_Upperarm.b1,R_Upperarm.L);  Z=Z-R_Upperarm.L;
    [X,Y,Z]=Rotation_solid(X,Y,Z,0,pi/2,0);
    [X,Y,Z]=trans_rot(X,Y,Z,v2);
+   [X,Y,Z]=trans_rot(X,Y,Z,v8);
    mesh(X,Y,Z);
    
    %L upper arm
@@ -136,5 +138,8 @@ for k=1:1:L
    mesh(X,Y,Z);
    
    %axis("equal")
+   pause(0.00001);
+   hold off;
+
   
 end

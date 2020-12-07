@@ -35,6 +35,8 @@ function []= main()
         %visualization(pos,MCfiles(i)); % comment this line if you get bored of my poor animation
         %visualization_adapted(Body, L, pos, ori ); %% check it, to improve
         disp('Type a key to continue');
+        visualization(pos,MCfiles(i)); % comment this line if you get bored of my poor animation
+              disp('Type a key to continue');
         pause();
  
         
@@ -43,6 +45,7 @@ function []= main()
         [alfa,beta,COM,mass,ms,inertia]= NE_forward(pos,ori,time,Body);
         [grdf,grdm]= NE_backward(pos,ori,time,Body,alfa,beta,COM,mass,ms,inertia);
         disp('Ground reactions computes (lie)');
+        disp('Ground reactions computes');
         disp('Type a key to continue');
         steps = length(grdf);
         pause();
@@ -51,8 +54,10 @@ function []= main()
         %% Compare results
         %comparing the error
         ForMom_Error(MCfiles(i),steps,F, grdf, grdm);
+        %ForMom_Error(MCfiles(i),steps,F, grdf, grdm);
         %comparing them side by side
         Force_Data_Plot(MCfiles(i), F, grdf, grdm)
+        %Force_Data_Plot(MCfiles(i), F, grdf, grdm)
 
 
         % Not very similar, possible error sources:
