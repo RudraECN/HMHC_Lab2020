@@ -1,8 +1,5 @@
 function [] = ForMom_Error(filename,steps,F, grdf, grdm)
-%TO call this function, you have to pass it:
-%         'name_of_my_file.csv'
-%while you are in the same folder of the data
-%The rest has to be passsed as an 1D vector of the same length
+filename = erase(filename,'.drf');
 
 %The return arguments can be removed and it can only be used to plot stuff
 %% Open and import data
@@ -69,7 +66,9 @@ xlabel('steps')
 ylabel('Nm')
 
 title(forces_moments_plot, my_title1)
-
+%Here use your repo by copy pasting the path at the top from matlab
+%fname = 'C:\Users\hp\Desktop\UNI-ECN\HMHC\Lab\HMHC_Lab2020\src\MATLAB\Figures';
+%saveas(gca,fullfile(fname, filename), 'jpeg');
 
 end
 

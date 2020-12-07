@@ -20,7 +20,6 @@ function [] = visualization_adapted(Body, L, pos, ori)
   L_Trunk=Body.lowertrunk;
 
 
-
 figure
 for k=1:1:L
    %head
@@ -37,7 +36,6 @@ for k=1:1:L
    [X,Y,Z]=trans_rot(X,Y,Z,v3);
    mesh(X,Y,Z);
 
-   
 
    %M_Trunk
    v2=[pos(2,:,k), ori(2,:,k)];
@@ -55,7 +53,6 @@ for k=1:1:L
    v8=[pos(8,:,k), ori(8,:,k)];
    [X,Y,Z]=elliptical(R_Upperarm.a0,R_Upperarm.b0,R_Upperarm.a1,R_Upperarm.b1,R_Upperarm.L);  Z=Z-R_Upperarm.L;
    [X,Y,Z]=Rotation_solid(X,Y,Z,0,pi/2,0);
-   [X,Y,Z]=trans_rot(X,Y,Z,v2);
    [X,Y,Z]=trans_rot(X,Y,Z,v8);
    mesh(X,Y,Z);
    
@@ -137,7 +134,6 @@ for k=1:1:L
    [X,Y,Z]=trans_rot(X,Y,Z,v19);
    mesh(X,Y,Z);
    
-   %axis("equal")
    pause(0.00001);
    hold off;
 

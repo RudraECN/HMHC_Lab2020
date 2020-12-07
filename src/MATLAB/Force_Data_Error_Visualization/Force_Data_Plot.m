@@ -3,6 +3,8 @@ function [] = Force_Data_Plot(filename, F, grdf, grdm)
 %% Plot Data
 % Create plots, forces and moments together
 figure(2)
+
+filename = erase(filename,'.drf');
 forces_moments_plot = tiledlayout(2,3); % Requires R2019b or later
 my_title1 = strcat('Forces and Moments side by side ', ':', filename);
 
@@ -55,6 +57,10 @@ title('Mz', 'FontSize',12,'FontWeight','bold','Color','#f9a800')
 xlabel('steps')
 ylabel('Nm')
 title(forces_moments_plot, my_title1 );
+
+%Here use your repo by copy pasting the path at the top from matlab
+%fname = 'C:\Users\hp\Desktop\UNI-ECN\HMHC\Lab\HMHC_Lab2020\src\MATLAB\Figures';
+%saveas(gca,fullfile(fname, filename), 'jpeg');
 
 end
 
