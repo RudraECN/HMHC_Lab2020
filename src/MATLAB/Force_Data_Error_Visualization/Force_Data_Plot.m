@@ -50,7 +50,7 @@ ylabel('Nm')
 nexttile
         plot(F(6,:));
         hold on;
-        plot(grdf(3,:));
+        plot(grdm(3,:));
 title('Mz', 'FontSize',12,'FontWeight','bold','Color','#f9a800')
 xlabel('steps')
 ylabel('Nm')

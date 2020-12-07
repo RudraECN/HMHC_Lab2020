@@ -23,7 +23,7 @@ Fy(i) = grdf(2,i) - dataFy(i);
 Fz(i) = grdf(3,i) - dataFz(i);
 Mx(i) = grdm(1,i) - dataMx(i);
 My(i) = grdm(2,i) - dataMy(i);
-Mz(i) = grdf(3,i) - dataMz(i);
+Mz(i) = grdm(3,i) - dataMz(i);
 end
 
 %% Plot Data
