@@ -57,7 +57,7 @@ title('Mz', 'FontSize',12,'FontWeight','bold','Color','#f9a800')
 xlabel('steps')
 ylabel('Nm')
 title(forces_moments_plot, my_title1 );
-
+legend('ForcePlates','GroundReactions');
 %Here use your repo by copy pasting the path at the top from matlab
 %fname = 'C:\Users\hp\Desktop\UNI-ECN\HMHC\Lab\HMHC_Lab2020\src\MATLAB\Figures';
 %saveas(gca,fullfile(fname, filename), 'jpeg');
