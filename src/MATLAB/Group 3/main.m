@@ -6,8 +6,8 @@ clc
 
 
 %% Adding all the directories
-addpath(genpath('../MATLAB'));
-addpath(genpath('../Lab_Files'));
+addpath(genpath('../../MATLAB'));
+addpath(genpath('../../Lab_Files'));
 
 %% Get the P values
 P = plotmeasurements();

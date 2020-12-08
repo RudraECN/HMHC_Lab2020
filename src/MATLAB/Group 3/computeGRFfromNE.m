@@ -42,15 +42,15 @@ for part = [12,11,10,9,8,7,4]
         if (part==12 || part==11)
             f_nextbody = [0,0,0];
             m_nextbody = [0,0,0];
-            dist = pos(part-2,:,i) - pos(part,:,i);
+            dist = pos(part,:,i) - pos(part-2,:,i);
         elseif (part==4)
             f_nextbody = [0,0,0];
             m_nextbody = [0,0,0];
-            dist = pos(3,:,i) - pos(part,:,i);
+            dist = pos(part,:,i) - pos(3,:,i);
         else
             f_nextbody = f_i(part+2,:,i);
             m_nextbody = m_i(part+2,:,i);
-            dist = pos(part-2,:,i) - pos(part,:,i); 
+            dist = pos(part,:,i) - pos(part-2,:,i); 
         end
         [f_i(part,:,i),m_i(part,:,i)] = solve_NE_RHS(alpha(part,:,i),...
             beta(part,:,i),ori(part,:,i),COM(part,:),mass(part),...
@@ -70,7 +70,7 @@ for i = 1:n-5
     M = [Mhead;Mleft;Mright];
     distleft = pos(5,:,i) - pos(3,:,i);
     distright = pos(6,:,i) - pos(3,:,i);
-    distchest = pos(2,:,i) - pos(3,:,i);
+    distchest = pos(3,:,i) - pos(2,:,i);
     dist = [distleft;distright;distchest];
     [f_i(3,:,i),m_i(3,:,i)] = solve_NE_RHS(alpha(3,:,i),beta(3,:,i),...
         ori(3,:,i),COM(3,:),mass(3),F,M,dist,'uppertrunk');
@@ -92,11 +92,11 @@ for part = [16,15,18,17,20,19]
         if(part==16 || part==15)
             f_nextbody = 0.5*f_i(2,:,i);
             m_nextbody = 0.5*m_i(2,:,i);
-            dist = pos(part-2,:,i) - pos(part,:,i);
+            dist = pos(part,:,i) - pos(part-2,:,i);
         else
             f_nextbody = f_i(part-2,:,i);
             m_nextbody = m_i(part-2,:,i);
-            dist = pos(part-2,:,i) - pos(part,:,i);
+            dist = pos(part,:,i) - pos(part-2,:,i);
         end
         [f_i(part,:,i),m_i(part,:,i)] = solve_NE_RHS(alpha(part,:,i),...
             beta(part,:,i),ori(part,:,i),COM(part,:),mass(part),...
