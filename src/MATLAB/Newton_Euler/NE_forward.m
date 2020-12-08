@@ -1,6 +1,4 @@
 %% Computes alfa and beta for all the bodies
-%% KINDA WORKS BUT IT NEEDS TESTING
-
 function [alfa,beta,COM,mass,ms,inertia]= NE_forward(pos,ori,time,body)
 
     [v, v_dot, w, w_dot] = central_difference(pos,ori,time);

@@ -21,7 +21,7 @@ function [] = visualization_adapted(Body, time, pos, ori)
   
   L=length(time);
   dt=time(2)-time(1);
-
+  
 for k=1:L
     hold off;
    %head
@@ -29,6 +29,7 @@ for k=1:L
    [X,Y,Z] = ellipsoid(0,0,0,Head.a,Head.b,Head.c); %Z=Z-Head.c;
    [X,Y,Z]=trans_rot(X,Y,Z,v4);
    mesh(X,Y,Z);
+   axis([-1 1 -1 1 0 2]);
    %t=CoM_pos_orientation(Head,motion.J4(:,k));
    %plot3(t(1),t(2),t(3),'o-r','Linewidth',4)
    hold on
@@ -39,6 +40,7 @@ for k=1:L
    [X,Y,Z]=elliptical(U_Trunk.a0,U_Trunk.b0,U_Trunk.a1,U_Trunk.b1,U_Trunk.L); Z=Z-U_Trunk.L;
    [X,Y,Z]=trans_rot(X,Y,Z,v3);
    mesh(X,Y,Z);
+   axis([-1 1 -1 1 0 2]);
 
 
    %M_Trunk
@@ -46,11 +48,13 @@ for k=1:L
    [X,Y,Z]=elliptical(M_Trunk.a0,M_Trunk.b0,M_Trunk.a1,M_Trunk.b1,M_Trunk.L); Z=Z-M_Trunk.L/2;
    [X,Y,Z]=trans_rot(X,Y,Z,v2);
    mesh(X,Y,Z);
+   axis([-1 1 -1 1 0 2]);
 
    %L_trunk
    [X,Y,Z]=elliptical(L_Trunk.a0,L_Trunk.b0,L_Trunk.a1,L_Trunk.b1,L_Trunk.L);  Z=Z-L_Trunk.L-M_Trunk.L/2;
    [X,Y,Z]=trans_rot(X,Y,Z,v2);
    mesh(X,Y,Z);
+   axis([-1 1 -1 1 0 2]);
 
    
    %R upper arm
@@ -59,6 +63,7 @@ for k=1:L
    [X,Y,Z]=Rotation_solid(X,Y,Z,0,pi/2,0);
    [X,Y,Z]=trans_rot(X,Y,Z,v8);
    mesh(X,Y,Z);
+   axis([-1 1 -1 1 0 2]);
    
    %L upper arm
    v7=[pos(7,:,k), ori(7,:,k)]';
@@ -66,6 +71,7 @@ for k=1:L
    [X,Y,Z]=Rotation_solid(X,Y,Z,0,pi/2,0);
    [X,Y,Z]=trans_rot(X,Y,Z,v7);
    mesh(X,Y,Z);
+   axis([-1 1 -1 1 0 2]);
 
    %R forearm
    v10=[pos(10,:,k), ori(10,:,k)]';
@@ -73,6 +79,7 @@ for k=1:L
    [X,Y,Z]=Rotation_solid(X,Y,Z,0,pi/2,0);
    [X,Y,Z]=trans_rot(X,Y,Z,v10);
    mesh(X,Y,Z);
+   axis([-1 1 -1 1 0 2]);
    
    %L forearm
    v9=[pos(9,:,k), ori(9,:,k)]';
@@ -80,6 +87,7 @@ for k=1:L
    [X,Y,Z]=Rotation_solid(X,Y,Z,0,pi/2,0);
    [X,Y,Z]=trans_rot(X,Y,Z,v9);
    mesh(X,Y,Z);
+   axis([-1 1 -1 1 0 2]);
    
    %R hand
    v12=[pos(12,:,k), ori(12,:,k)]';
@@ -87,6 +95,7 @@ for k=1:L
    [X,Y,Z]=Rotation_solid(X,Y,Z,0,pi/2,0);
    [X,Y,Z]=trans_rot(X,Y,Z,v12);
    mesh(X,Y,Z);
+   axis([-1 1 -1 1 0 2]);
    
    %L hand
    v11=[pos(11,:,k), ori(11,:,k)]';
@@ -94,6 +103,7 @@ for k=1:L
    [X,Y,Z]=Rotation_solid(X,Y,Z,0,pi/2,0);
    [X,Y,Z]=trans_rot(X,Y,Z,v11);
    mesh(X,Y,Z);
+   axis([-1 1 -1 1 0 2]);
    
    %R thigh
    v16=[pos(16,:,k), ori(16,:,k)]';
@@ -101,6 +111,7 @@ for k=1:L
    [X,Y,Z]=Rotation_solid(X,Y,Z,pi,0,0);
    [X,Y,Z]=trans_rot(X,Y,Z,v16);
    mesh(X,Y,Z);
+   axis([-1 1 -1 1 0 2]);
 
    
    %L thigh 
@@ -109,6 +120,7 @@ for k=1:L
    [X,Y,Z]=Rotation_solid(X,Y,Z,pi,0,0);
    [X,Y,Z]=trans_rot(X,Y,Z,v15);
    mesh(X,Y,Z);
+   axis([-1 1 -1 1 0 2]);
    
    %R shank
    v18=[pos(18,:,k), ori(18,:,k)]';
@@ -116,6 +128,7 @@ for k=1:L
    [X,Y,Z]=Rotation_solid(X,Y,Z,pi,0,0);
    [X,Y,Z]=trans_rot(X,Y,Z,v18);
    mesh(X,Y,Z);
+   axis([-1 1 -1 1 0 2]);
    
    %L shank 
    v17=[pos(17,:,k), ori(17,:,k)]';
@@ -123,6 +136,7 @@ for k=1:L
    [X,Y,Z]=Rotation_solid(X,Y,Z,pi,0,0);
    [X,Y,Z]=trans_rot(X,Y,Z,v17);
    mesh(X,Y,Z);
+   axis([-1 1 -1 1 0 2]);
    
    %R foot
    v20=[pos(20,:,k), ori(20,:,k)]';
@@ -130,6 +144,7 @@ for k=1:L
    [X,Y,Z]=Rotation_solid(X,Y,Z,-pi/2,0,0);
    [X,Y,Z]=trans_rot(X,Y,Z,v20);
    mesh(X,Y,Z);
+   axis([-1 1 -1 1 0 2]);
    
    %L foot
    v19=[pos(19,:,k), ori(19,:,k)]';
@@ -137,9 +152,13 @@ for k=1:L
    [X,Y,Z]=Rotation_solid(X,Y,Z,-pi/2,0,0);
    [X,Y,Z]=trans_rot(X,Y,Z,v19);
    mesh(X,Y,Z);
+   axis([-1 1 -1 1 0 2]);
    
-   axis("equal");
-   pause(dt);
+   pause(dt/100);
 
   
+end
+
+close all;
+
 end

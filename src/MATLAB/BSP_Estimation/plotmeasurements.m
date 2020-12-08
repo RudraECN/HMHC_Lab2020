@@ -92,7 +92,9 @@ std=[
 %% Plots the values
 figure;
 e = errorbar(P,std,'o');
-title('Hanavan Parameters Mean and Standard Deviation', 'FontSize',12,'FontWeight','bold','Color','#f9a800');
+str='#f9a800';
+color = sscanf(str(2:end),'%2x%2x%2x',[1 3])/255;
+title('Hanavan Parameters Mean and Standard Deviation', 'FontSize',12,'FontWeight','bold','Color',color);
 xlabel('Parameter Number');
 ylabel('cm');
 

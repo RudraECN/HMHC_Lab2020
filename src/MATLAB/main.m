@@ -24,61 +24,46 @@ function []= main()
         "mediumKickArm.csv", "medJump.csv", "quickJump.csv", "slowArm.csv", "slowKick.csv", "slowKickArm.csv"];
     
     % Testing only the slowArm for now, i=16
-    for i=6:length(MCfiles)
+    % WORKS BEST FOR i= 4 6 8 9 10 11 12 14 15 16 17 18
+    % Judging only for the Fz and grdfz
+    for i=15:length(MCfiles)
         
         disp('Reading file');
         F= readForce(forcefiles(i));
         [pos,ori,time]= readDRF(MCfiles(i));
-        disp('Visualizating file:');
-        disp(MCfiles(i));
-        L = length(time);
-        %visualization(pos,MCfiles(i)); % comment this line if you get bored of my poor animation
-        %visualization_adapted(Body, L, pos, ori ); %% check it, to improve
-        disp('Type a key to continue');
-        visualization(pos,MCfiles(i)); % comment this line if you get bored of my poor animation
-              disp('Type a key to continue');
-        pause();
- 
         
-        %% TODO
         %% Compute NE for each serial or tree structure -> get the forces on the ground
         [alfa,beta,COM,mass,ms,inertia]= NE_forward(pos,ori,time,Body);
         [grdf,grdm]= NE_backward(pos,ori,time,Body,alfa,beta,COM,mass,ms,inertia);
-        disp('Ground reactions computes (lie)');
-        disp('Ground reactions computes');
-        disp('Type a key to continue');
-        steps = length(grdf);
-        pause();
+        disp('Ground reactions computed');
+        
+        [F,grdf,grdm,pos,ori,time]=align_plots(F,grdf,grdm,pos,ori,time);
+        
+        disp('Visualizating file:');
+        disp(MCfiles(i));
+        %visualization(pos,MCfiles(i)); % comment this line if you get bored of my poor animation
+        visualization_adapted(Body, time, pos, ori);
+        
+        disp('Plotting results:');
+        
+        %steps = length(grdf);
         
         %% TODO
         %% Compare results
         %comparing the error
-        ForMom_Error(MCfiles(i),steps,F, grdf, grdm);
         %ForMom_Error(MCfiles(i),steps,F, grdf, grdm);
         %comparing them side by side
-        Force_Data_Plot(MCfiles(i), F, grdf, grdm)
-        %Force_Data_Plot(MCfiles(i), F, grdf, grdm)
-
+        Force_Data_Plot(MCfiles(i), F, grdf, grdm);
+        disp('Type a key to continue');
+        pause();
 
         % Not very similar, possible error sources:
-        % 1. Apparently when they did the experiment, they started recording
-        % the measurments from the ground plate before the measurements
-        % from the motion capture, so in practice, we don't know at which
-        % point of the recorded F data, the movement and measurments of the
-        % motion capture sensor started. This means that in that these
-        % plots are off phase!
-        % 2. There must be mistakes in the NE algorithm (maybe a missing force
+        % 1. There must be mistakes in the NE algorithm (maybe a missing force
         % or moment, maybe a sign, maybe dimensions, maybe in the loops or somewhere else)
         % because the plots arent in the same order!
-        % 3. Maybe we should apply a filter to the data to smooth the
-        % signals obtained (like velocities and accelerations) and also remove the outliners
-        
-        
+        % 2. Consider filter the final grd reactions
         
     end
-    
-
-    
 
 end
 
